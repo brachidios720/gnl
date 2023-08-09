@@ -1,4 +1,4 @@
-#include "getnextline.h"
+#include "get_next_line.h"
 
 size_t     ft_strlen(char *str)
 {
@@ -14,7 +14,7 @@ size_t     ft_strlen(char *str)
     return(i);
 }
 
-char    *ft_strjoin(const char *s1, const char *s2)
+char    *ft_strjoin(char *s1, char *s2)
 {
     int i;
     int j;
@@ -28,15 +28,16 @@ char    *ft_strjoin(const char *s1, const char *s2)
         free(s1);
         return(0);
     }
-    while(s1[i])
+    while((s1 != NULL) && s1[i])
     {
         p[i] = s1[i];
         i++;
     }
     while(s2[j])
     {
-        p[i++] = s2[j];
+        p[i] = s2[j];
         j++;
+        i++;
     }
     free(s1);
     p[i] = '\0';
@@ -47,12 +48,14 @@ char    *ft_strchr(const char  *s, int c)
 {
     size_t     i;
 
-    while(s[i])
+    if (s == NULL)
+        return (NULL); 
+    i = 0;
+    while(s[i] != '\0')
     {
         if(s[i] == c )
             return((char*)s + i);
+        i++;
     }
-    if(!c && s[i] != '\0')
-        return((char*)s + i);
     return(NULL);
 }
